@@ -12,9 +12,9 @@ sudo apt install mosquitto-clients -y
 
 1. Setup config file
 
-```plaintext
-sudo nano /etc/mosquitto/mosquitto.conf
-```
+  ```plaintext
+  sudo nano /etc/mosquitto/mosquitto.conf
+  ```
 
     1. Delete the line
 
