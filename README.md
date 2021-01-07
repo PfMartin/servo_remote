@@ -1,6 +1,6 @@
-### Servo Remote
+# Servo Remote
 
-#### Setup mosquitto on your Raspberry Pi
+## Setup mosquitto on your Raspberry Pi
 1. Download mosquitto
 ```plaintext
 sudo apt update && sudo apt upgrade -y
@@ -31,12 +31,14 @@ sudo mosquitto_passwd -c /etc/mosquitto/pwfile username
 sudo reboot
 ```
 
-#### Test the broker
-1. Subscribe to a topic
-```plaintext
-mosquitto_sub -d -u username -P password -t test
-```
-1. Publish to the same topic
-```plaintext
-mosquitto_pub -d -u username -P password -t test -m "Did you get that?"
-```
+1. Test the broker
+  1. Subscribe to a topic
+  ```plaintext
+  mosquitto_sub -d -u username -P password -t test
+  ```
+  1. Publish to the same topic
+  ```plaintext
+  mosquitto_pub -d -u username -P password -t test -m "Did you get that?"
+  ```
+
+#### 
