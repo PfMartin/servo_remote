@@ -1,25 +1,45 @@
-import paho.mqtt.client as mqtt
+import RPi.GPIO as GPIO
+from time import sleep
 
-# Variable section
-clientName = 'Accelerometer'
-brokerIp = '192.168.178.26'
-username = 'martin'
-password = 'Jahnel01'
-topic = 'accel'
+pwmPin = 3
+pwmFreq = 50
 
-def on_connect(client, userdata, flags, rc):
-  print('Connected with result code', rc)
-  client.subscribe(topic)
 
-def on_message(client, userdata, msg):
-  print(msg.topic, msg.payload)
+# Motor has a range between 2% and 12%
+# Range is 10%, which equals 180°
+# 180° / (18 %/°) + 2% = 12%
+# 0° / 18 (18 %/°) + 2% = 2
 
-# Connection to broker
-client = mqtt.Client(client_id=clientName, clean_session=True, userdata=None, protocol=mqtt.MQTTv311, transport='tcp')
-client.on_connect = on_connect
-client.on_message = on_message
+def setAngle(angle):
+  duty = angle / 18 + 2
+  GPIO.output(pwmPin, True)
+  pwm.ChangeDutyCycle(duty)
+  sleep(1)
+  GPIO.output(pwmPin, False)
+  pwm.ChangeDutyCycle(0)
 
-client.connect(brokerIp)
+def main():
+  while(True):
+    setAngle(25)
+    setAngle(90)
+    setAngle(160)
+    setAngle(90)
 
-client.loop_forever()
-# Mqtt settings for receiving messages
+if __name__ == "__main__":
+  GPIO.setmode(GPIO.BOARD) # Set names to board mode
+  GPIO.setup(pwmPin, GPIO.OUT) # Set GPIO to output mode
+  pwm = GPIO.PWM(pwmPin, pwmFreq) # Setup GPIO to pwm mode
+
+  pwm.start(0)
+
+  try:
+    main()
+
+  except:
+    print('\nAn exception has occurred\nExiting the program')
+
+  finally:
+    print('Stopping PWM')
+    pwm.stop()
+    print('Cleaning up GPIOs')
+    GPIO.cleanup()
