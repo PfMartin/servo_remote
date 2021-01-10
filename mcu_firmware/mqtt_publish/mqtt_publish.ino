@@ -5,14 +5,14 @@
 const int mpuAddress = 0x68;
 
 //Variables for the WiFi connection
-const char* ssid = "AsGuadeInternet";
-const char* wifiPassword = "Katzenlaube";
+const char* ssid = "FRITZ!Box 7582 PJ";
+const char* wifiPassword = "95605533072376088713";
 
 //Variables for the connection to the MQTT Broker
-const char* mqttServer = "192.168.178.78";
-const char* mqttTopic = "movement";
-const char* mqttUser = "pi";
-const char* mqttPassword = "Jahnel01";
+const char* mqttServer = "192.168.178.26";
+const char* mqttTopic = "accel";
+const char* mqttUser = "";
+const char* mqttPassword = "";
 const char* clientId = "ESP32|MPU6050";
 const int listenerPort = 1883;
 
